@@ -11,8 +11,9 @@
     "pretty": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
+    "allowJs": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
     "noImplicitUseStrict": false,
     "noFallthroughCasesInSwitch": true
   },

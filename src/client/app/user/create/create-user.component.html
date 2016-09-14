@@ -1,0 +1,16 @@
+<p>
+  Howdy! Here's a list of awesome computer scientists. Do you know any others? Add to the list yourself.
+</p>
+
+<form (submit)="createUser()">
+
+  <input [(ngModel)]="user.firstName" name="firstName" placeholder="First Name" /> <br />
+  <input [(ngModel)]="user.lastName" name="lastName" placeholder="Last Name" /> <br />
+  <input [(ngModel)]="user.email" name="email" placeholder="Email" /> <br />
+
+  <button type="submit">Create</button>
+</form>
+
+<!--<ul>-->
+  <!--<li *ngFor="let name of names">{{name}}</li>-->
+<!--</ul>-->

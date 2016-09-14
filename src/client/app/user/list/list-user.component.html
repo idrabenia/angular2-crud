@@ -1,0 +1,25 @@
+<p>
+  Howdy! Here's a list of awesome computer scientists. Do you know any others? Add to the list yourself.
+</p>
+
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let curUser of users">
+        <td>{{curUser.firstName}}</td>
+        <td>{{curUser.lastName}}</td>
+        <td>{{curUser.email}}</td>
+        <td (click)="deleteUser(curUser)">x</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
