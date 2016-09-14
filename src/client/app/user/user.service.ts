@@ -31,5 +31,4 @@ export class UserService {
   private processError(error: any, result: any): any {
     console.log(error);
   }
-
 }
