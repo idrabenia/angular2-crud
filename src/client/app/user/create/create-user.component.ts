@@ -54,7 +54,7 @@ export class CreateUserComponent implements OnInit {
 
     this.userService.save(this.user)
       .subscribe(
-        res => this.router.navigate(['']),
+        res => this.router.navigate(['/user']),
         err => console.log(err)
       );
 
