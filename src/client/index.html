@@ -12,6 +12,38 @@
 </head>
 <body>
 
+  <script src="https://cdn.auth0.com/js/lock/10.2/lock.min.js"></script>
+  <script type="text/javascript">
+    var lock = new Auth0Lock('OGPrgFzCBt6Yr6zRY88bGRDCotTQIVVu', 'idrabenia.eu.auth0.com', {
+      auth: {
+        //redirectUrl: 'http://localhost:5555',
+        //responseType: 'code',//'token',
+        //params: {
+        //  scope: 'openid email' // Learn about scopes: https://auth0.com/docs/scopes
+        //}
+      }
+    });
+
+    // Listening for the authenticated event
+    lock.on("authenticated", function(authResult) {
+      console.log(authResult);
+
+      // Use the token in authResult to getProfile() and save it to localStorage
+      lock.getProfile(authResult.idToken, function(error, profile) {
+        if (error) {
+          // Handle error
+          return;
+        }
+
+        localStorage.setItem('idToken', authResult.idToken);
+
+        localStorage.setItem('profile', JSON.stringify(profile));
+        console.log(profile);
+      });
+    });
+  </script>
+  <button onclick="lock.show();">Login</button>
+
   <sd-app>Loading...</sd-app>
 
   <script>

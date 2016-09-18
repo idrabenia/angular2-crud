@@ -8,13 +8,17 @@ export class UserService {
   httpOptions: any;
 
   constructor(private http: Http) {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.idToken}`
+    });
+
     this.httpOptions = new RequestOptions({ headers: headers });
   }
 
   query() {
     return this.http
-      .get(`${this.SERVER_API}/user`)
+      .get(`${this.SERVER_API}/user`, this.httpOptions)
       .catch(this.processError);
   }
 
