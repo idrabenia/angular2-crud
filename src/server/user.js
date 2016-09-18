@@ -14,31 +14,29 @@ function UserController (app) {
     email: { type: String, required: true }
   });
 
-  app.post('/api/user', function (req, res) {
-    User
+  app.post('/api/user', safe((req, res) => {
+    return User
       .create(req.body)
-      .then(user => res.json(user))
-      .catch(sendError(res));
-  });
+      .then(user => res.json(user));
+  }));
 
-  app.get('/api/user', function (req, res) {
-    User
+  app.get('/api/user', safe((req, res) => {
+    return User
       .find()
-      .then(users => res.json(users))
-      .catch(sendError(res));
-  });
+      .then(users => res.json(users));
+  }));
 
-  app.delete('/api/user/:userId', function (req, res) {
+  app.delete('/api/user/:userId', safe((req, res) => {
     let userId = req.params.userId;
 
-    User
+    return User
       .findByIdAndRemove(userId)
-      .then(() => res.json({ }))
-      .catch(sendError(res));
-  });
+      .then(() => res.json({ }));
+  }));
 
-  function sendError (res) {
-    return error => res.json({ error })
+  function safe(callback) {
+    return (req, res) =>
+      callback(req, res).catch(error => res.json({ error }));
   }
 }
 
