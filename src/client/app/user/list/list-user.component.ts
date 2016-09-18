@@ -41,7 +41,7 @@ export class ListUserComponent implements OnInit {
 
   deleteUser(user) {
     this.userService
-      .deleteUser(user.id)
+      .deleteUser(user._id)
       .subscribe(
         data => this.ngOnInit(),
         err => console.log(err)
