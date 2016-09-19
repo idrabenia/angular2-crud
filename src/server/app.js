@@ -1,11 +1,12 @@
 'use strict';
 
 let express = require('express');
-let registerUserRoutes = require('./user');
+let user = require('./user');
+let bodyParser = require('body-parser');
 let app = express();
 let configureSecurity = require('./config/security');
 
-app.configure(() => {
+function init () {
   configureSecurity(app);
 
   app.use(function(req, res, next) {
@@ -16,12 +17,11 @@ app.configure(() => {
     next();
   });
 
-  app.use(express.bodyParser());
-  app.use(app.router);
+  app.use(bodyParser.json());
 
-  registerUserRoutes(app);
-});
+  app.use('/api/user', user);
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
-});
+  app.listen(3000, () => console.log('App listening on port 3000!'));
+}
+
+init ();

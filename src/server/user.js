@@ -3,9 +3,10 @@
 let mongoose = require('mongoose');
 let uuid = require('node-uuid');
 let _ = require('lodash');
+let router = require('express').Router();
 
 
-function UserController (app) {
+module.exports = (function () {
   mongoose.connect('mongodb://localhost:27017/angular2Probe');
 
   let User = mongoose.model('User', {
@@ -14,19 +15,24 @@ function UserController (app) {
     email: { type: String, required: true }
   });
 
-  app.post('/api/user', safe((req, res) => {
+  function safe(callback) {
+    return (req, res) =>
+      callback(req, res).catch(error => res.json({ error }));
+  }
+
+  router.post('/', safe((req, res) => {
     return User
       .create(req.body)
       .then(user => res.json(user));
   }));
 
-  app.get('/api/user', safe((req, res) => {
+  router.get('/', safe((req, res) => {
     return User
       .find()
       .then(users => res.json(users));
   }));
 
-  app.delete('/api/user/:userId', safe((req, res) => {
+  router.delete('/:userId', safe((req, res) => {
     let userId = req.params.userId;
 
     return User
@@ -34,10 +40,5 @@ function UserController (app) {
       .then(() => res.json({ }));
   }));
 
-  function safe(callback) {
-    return (req, res) =>
-      callback(req, res).catch(error => res.json({ error }));
-  }
-}
-
-module.exports = UserController;
+  return router;
+})();
