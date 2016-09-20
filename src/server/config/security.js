@@ -1,15 +1,12 @@
 'use strict';
 
 let jwt = require('express-jwt');
+let config = require('./../config');
 
 
 function JwtMiddleware () {
   let self = this;
-
-  let jwtCheck = jwt({
-    secret: new Buffer('ehnZ63AZacokI0zATk1iYsHDLS1V_EKB657JMY0saAwJi8pzLFxJlQWkk_H6BmSh', 'base64'),
-    audience: 'OGPrgFzCBt6Yr6zRY88bGRDCotTQIVVu'
-  });
+  let jwtCheck = jwt(config.auth0);
 
   self.validate = function (req, res, next) {
     if (req.method === 'OPTIONS') {

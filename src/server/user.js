@@ -7,8 +7,6 @@ let router = require('express').Router();
 
 
 module.exports = (function () {
-  mongoose.connect('mongodb://localhost:27017/angular2Probe');
-
   let User = mongoose.model('User', {
     firstName: String,
     lastName: String,
