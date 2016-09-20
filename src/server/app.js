@@ -1,7 +1,7 @@
 'use strict';
 
 let express = require('express');
-let user = require('./user');
+let user = require('./controllers/user');
 let bodyParser = require('body-parser');
 let jwtMiddleware = require('./config/security');
 let corsMiddleware = require('./config/cors');
