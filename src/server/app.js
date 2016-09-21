@@ -14,7 +14,7 @@ function init () {
   let app = express();
   mongoose.connect(config.mongodb.url);
   log4js.configure(config.log4js);
-  log4js.addAppender(logzio.appender('QVHxtRWixocpGKEpeuWbKEWcWfsgpQFt'));
+  log4js.addAppender(logzio.appender(config.logzio.key));
 
   app.use(jwtMiddleware);
   app.use(corsMiddleware);
