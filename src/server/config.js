@@ -12,16 +12,19 @@ module.exports = {
   log4js: {
     appenders: [
       {
-        type: "console",
-        layout: { type: "pattern", pattern: "%d{dd/MM hh:mm} %-5p %m" }
-      },{
-        type: "file",
-        filename: "logs.log",
+        type: 'console',
+        layout: { type: 'pattern', pattern: '%d{dd/MM hh:mm} %-5p %m' }
+      }, {
+        type: 'file',
+        filename: 'logs.log',
         maxLogSize: 10240,
         backups: 3,
-        layout: { type: "pattern", pattern: "%d{dd/MM hh:mm} %-5p %m" }
+        layout: { type: 'pattern', pattern: '%d{dd/MM hh:mm} %-5p %m' }
       }
     ],
     replaceConsole: true
+  },
+  logzio: {
+    key: 'QVHxtRWixocpGKEpeuWbKEWcWfsgpQFt'
   }
 };

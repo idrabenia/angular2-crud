@@ -8,11 +8,13 @@ let corsMiddleware = require('./config/cors');
 let mongoose = require('mongoose');
 let config = require('./config');
 let log4js = require('log4js');
+let logzio = require('./config/logzio-logging');
 
 function init () {
   let app = express();
   mongoose.connect(config.mongodb.url);
   log4js.configure(config.log4js);
+  log4js.addAppender(logzio.appender('QVHxtRWixocpGKEpeuWbKEWcWfsgpQFt'));
 
   app.use(jwtMiddleware);
   app.use(corsMiddleware);
