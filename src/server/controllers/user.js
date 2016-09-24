@@ -30,6 +30,21 @@ module.exports = (function () {
       .then(users => res.json(users));
   }));
 
+  router.get('/:userId', safe((req, res) => {
+    return User
+      .findById(req.params.userId)
+      .then(user => res.json(user));
+  }));
+
+  router.post('/:userId', safe((req, res) => {
+    let userId = req.params.userId;
+
+    return User
+      .update({ '_id': userId }, req.body)
+      .then(result => User.findById(userId))
+      .then(user => res.json(user));
+  }));
+
   router.delete('/:userId', safe((req, res) => {
     let userId = req.params.userId;
 

@@ -16,7 +16,7 @@ function init () {
   log4js.configure(config.log4js);
   log4js.addAppender(logzio.appender(config.logzio.key));
 
-  app.use(jwtMiddleware);
+//  app.use(jwtMiddleware);
   app.use(corsMiddleware);
   app.use(bodyParser.json());
 

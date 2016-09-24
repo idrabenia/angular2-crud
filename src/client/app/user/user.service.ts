@@ -22,9 +22,20 @@ export class UserService {
       .catch(this.processError);
   }
 
+  findById(id: string) {
+    return this.http
+      .get(`${this.SERVER_API}/user/${id}`, this.httpOptions)
+      .catch(this.processError);
+  }
+
   save(user: any) {
     return this.http
       .post(`${this.SERVER_API}/user`, JSON.stringify(user), this.httpOptions);
+  }
+
+  update(user: any) {
+    return this.http
+      .post(`${this.SERVER_API}/user/${user._id}`, JSON.stringify(user), this.httpOptions);
   }
 
   deleteUser(id: string) {
