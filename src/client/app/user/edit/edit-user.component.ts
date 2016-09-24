@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NameListService } from '../../shared/index';
 import { UserService } from './../user.service';
 
 class User {
@@ -15,24 +14,14 @@ class User {
 @Component({
   moduleId: module.id,
   selector: 'sd-create-user',
-  templateUrl: 'create-user.component.html',
-  styleUrls: ['create-user.component.css'],
+  templateUrl: 'edit-user.component.html',
+  styleUrls: ['edit-user.component.css'],
   providers: [UserService]
 })
 export class CreateUserComponent implements OnInit {
-
   user: User = new User();
-  errorMessage: string;
-  names: any[] = [];
 
-  /**
-   * Creates an instance of the HomeComponent with the injected
-   * NameListService.
-   *
-   * @param {NameListService} nameListService - The injected NameListService.
-   */
   constructor(
-    public nameListService: NameListService,
     private router: Router,
     private userService: UserService
   ) { }
@@ -49,9 +38,6 @@ export class CreateUserComponent implements OnInit {
    * @return {boolean} false to prevent default form submit behavior to refresh the page.
    */
   createUser(): boolean {
-    console.log(this.user);
-    console.log(this.router);
-
     this.userService.save(this.user)
       .subscribe(
         res => this.router.navigate(['/user']),

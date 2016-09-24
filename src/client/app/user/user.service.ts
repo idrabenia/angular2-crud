@@ -4,8 +4,8 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 
 @Injectable()
 export class UserService {
-  SERVER_API: string = 'http://localhost:3000/api';
-  httpOptions: any;
+  private readonly SERVER_API = 'http://localhost:3000/api';
+  private httpOptions: any;
 
   constructor(private http: Http) {
     let headers = new Headers({
