@@ -15,10 +15,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let curUser of users" [routerLink]="['/user/' + curUser._id]">
-        <td>{{curUser.firstName}}</td>
-        <td>{{curUser.lastName}}</td>
-        <td>{{curUser.email}}</td>
+      <tr *ngFor="let curUser of users" >
+        <td [routerLink]="['/user/' + curUser._id]">{{curUser.firstName}}</td>
+        <td [routerLink]="['/user/' + curUser._id]">{{curUser.lastName}}</td>
+        <td [routerLink]="['/user/' + curUser._id]">{{curUser.email}}</td>
         <td (click)="deleteUser(curUser)">x</td>
       </tr>
     </tbody>
