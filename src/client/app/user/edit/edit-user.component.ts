@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Injectable } from '@angular/core';
+import { Router, ActivatedRoute, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { UserService } from './../user.service';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
 
 class User {
@@ -65,15 +66,7 @@ export class UpdateUserComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService
   ) {
-    route
-      .params
-      .flatMap(params =>
-        userService.findById(params.id)
-      )
-      .subscribe(
-        res => this.user = res.json(),
-        err => console.log(err)
-      );
+    this.user = route.snapshot.data['user'];
   }
 
   /**
@@ -97,4 +90,15 @@ export class UpdateUserComponent implements OnInit {
     return false;
   }
 
+}
+
+@Injectable()
+export class UserResolver implements Resolve<any> {
+  constructor(private userService: UserService) {}
+
+  resolve(route: ActivatedRouteSnapshot): Observable<any> {
+    return this.userService
+      .findById(route.params['id'])
+      .map(res => res.json());
+  }
 }

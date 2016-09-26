@@ -3,4 +3,5 @@
  */
 export * from './edit/edit-user.component';
 export * from './list/list-user.component';
+export * from './user.service';
 export * from './user.routes';
