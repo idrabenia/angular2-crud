@@ -16,13 +16,14 @@ function init () {
   log4js.configure(config.log4js);
   log4js.addAppender(logzio.appender(config.logzio.key));
 
-//  app.use(jwtMiddleware);
+  app.use(jwtMiddleware);
   app.use(corsMiddleware);
   app.use(bodyParser.json());
 
   app.use('/api/user', user);
 
   app.use(function uncaughtErrorHandler (err, req, res, next) {
+    res.status(err.status || 500);
     res.json({ error: { message: err.message } });
     console.error(err);
   });

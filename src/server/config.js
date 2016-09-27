@@ -17,7 +17,7 @@ module.exports = {
       }, {
         type: 'file',
         filename: 'logs.log',
-        maxLogSize: 10240,
+        maxLogSize: 2000000,
         backups: 3,
         layout: { type: 'pattern', pattern: '%d{dd/MM hh:mm} %-5p %m' }
       }
