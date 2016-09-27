@@ -3,21 +3,24 @@ import { Route, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { CreateUserComponent, ListUserComponent, UpdateUserComponent, UserResolver, UserService } from './index';
 
 
-export const UserRoutes: Route[] = [
-  {
-    path: 'user/create',
-    component: CreateUserComponent
-  }, {
-    path: 'user/:id',
-    component: UpdateUserComponent,
-    resolve: {
-      user: UserResolver
-    }
-  }, {
+export const UserRoutes: Route[] = [{
     path: 'user',
-    component: ListUserComponent
-  }
-];
+    component: ListUserComponent,
+    children: [
+    {
+      path: '',
+      component: null
+    }, {
+      path: 'create',
+      component: CreateUserComponent
+    }, {
+      path: ':id',
+      component: UpdateUserComponent,
+      resolve: {
+        user: UserResolver
+      }
+    }]
+}];
 
 export const UserRouteProviders: any[] = [
   UserResolver, UserService

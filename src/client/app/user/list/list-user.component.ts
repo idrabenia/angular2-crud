@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationStart } from '@angular/router';
 import { UserService } from './../user.service';
+import 'rxjs/add/operator/filter';
 
 /**
  * This class represents the lazy loaded HomeComponent.
@@ -15,6 +16,7 @@ import { UserService } from './../user.service';
 export class ListUserComponent implements OnInit {
 
   users: any[] = [];
+  isListState: boolean;
 
   /**
    * Creates an instance of the HomeComponent with the injected
@@ -25,7 +27,25 @@ export class ListUserComponent implements OnInit {
   constructor(
     private router: Router,
     private userService: UserService
-  ) { }
+  ) {
+    this.isListState = this.checkListState(router.url);
+
+    this.onNavigationStart(event => {
+      this.ngOnInit();
+      this.isListState = this.checkListState(event['url']);
+    });
+  }
+
+  private onNavigationStart(callback) {
+    this.router
+      .events
+      .filter(event => event instanceof NavigationStart)
+      .subscribe(callback);
+  }
+
+  private checkListState(url) {
+    return url === '/user';
+  }
 
   /**
    * Get the names OnInit
@@ -36,7 +56,7 @@ export class ListUserComponent implements OnInit {
       .subscribe(
         res => this.users = res.json(),
         err => console.log(err)
-      )
+      );
   }
 
   deleteUser(user) {
@@ -45,7 +65,7 @@ export class ListUserComponent implements OnInit {
       .subscribe(
         data => this.ngOnInit(),
         err => console.log(err)
-      )
+      );
   }
 
 }

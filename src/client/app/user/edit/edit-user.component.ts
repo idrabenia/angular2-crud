@@ -4,12 +4,12 @@ import { UserService } from './../user.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
 
+
 class User {
   firstName: string = '';
   lastName: string = '';
   email: string = '';
 }
-
 
 @Component({
   moduleId: module.id,
