@@ -1,16 +1,24 @@
-<p>
-  Howdy! Here's a list of awesome computer scientists. Do you know any others? Add to the list yourself.
-</p>
+<form #form="ngForm" (submit)="save(form)" novalidate>
 
-<form (submit)="createUser()">
+  <input [(ngModel)]="user.firstName" name="firstName" placeholder="First Name" required #firstNameModel="ngModel" />
+  <span *ngIf="(firstNameModel.dirty || form.submitted) && firstNameModel.errors?.required">
+    Field must contains valid first name
+  </span>
+  <br />
 
-  <input [(ngModel)]="user.firstName" name="firstName" placeholder="First Name" /> <br />
-  <input [(ngModel)]="user.lastName" name="lastName" placeholder="Last Name" /> <br />
-  <input [(ngModel)]="user.email" name="email" placeholder="Email" /> <br />
+  <input [(ngModel)]="user.lastName" name="lastName" placeholder="Last Name" required #lastNameModel="ngModel" />
+  <span *ngIf="(lastNameModel.dirty || form.submitted) && lastNameModel.errors?.required">
+    Field must contains valid last name
+  </span>
+  <br />
+
+  <input [(ngModel)]="user.email" name="email" placeholder="Email" required #emailModel="ngModel" />
+  <span *ngIf="(emailModel.dirty || form.submitted) && emailModel.errors?.required">
+    Field must contains valid email
+  </span>
+  <br />
 
   <button type="submit">Save</button>
+
 </form>
 
-<!--<ul>-->
-  <!--<li *ngFor="let name of names">{{name}}</li>-->
-<!--</ul>-->

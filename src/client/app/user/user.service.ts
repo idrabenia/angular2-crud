@@ -10,7 +10,7 @@ export class UserService {
   constructor(private http: Http) {
     let headers = new Headers({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.idToken}`
+      'Authorization': `Bearer ${localStorage['idToken']}`
     });
 
     this.httpOptions = new RequestOptions({ headers: headers });

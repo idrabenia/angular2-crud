@@ -10,9 +10,7 @@ class User {
   email: string = '';
 }
 
-/**
- * This class represents the lazy loaded HomeComponent.
- */
+
 @Component({
   moduleId: module.id,
   selector: 'sd-create-user',
@@ -20,7 +18,7 @@ class User {
   styleUrls: ['edit-user.component.css'],
   providers: [UserService]
 })
-export class CreateUserComponent implements OnInit {
+export class CreateUserComponent {
   user: User = new User();
 
   constructor(
@@ -28,19 +26,13 @@ export class CreateUserComponent implements OnInit {
     private userService: UserService
   ) { }
 
-  /**
-   * Get the names OnInit
-   */
-  ngOnInit() {
-  //    this.getNames();
-  }
+  save(form): boolean {
+    if (!form.valid) {
+      return;
+    }
 
-  /**
-   * Pushes a new name onto the names array
-   * @return {boolean} false to prevent default form submit behavior to refresh the page.
-   */
-  createUser(): boolean {
-    this.userService.save(this.user)
+    this.userService
+      .save(this.user)
       .subscribe(
         res => this.router.navigate(['/user']),
         err => console.log(err)
@@ -58,8 +50,8 @@ export class CreateUserComponent implements OnInit {
   styleUrls: ['edit-user.component.css'],
   providers: [UserService]
 })
-export class UpdateUserComponent implements OnInit {
-  user: User = new User();
+export class UpdateUserComponent {
+  user: User;
 
   constructor(
     private router: Router,
@@ -69,19 +61,13 @@ export class UpdateUserComponent implements OnInit {
     this.user = route.snapshot.data['user'];
   }
 
-  /**
-   * Get the names OnInit
-   */
-  ngOnInit() {
-  //    this.getNames();
-  }
+  save(form): boolean {
+    if (!form.valid) {
+      return;
+    }
 
-  /**
-   * Pushes a new name onto the names array
-   * @return {boolean} false to prevent default form submit behavior to refresh the page.
-   */
-  createUser(): boolean {
-    this.userService.update(this.user)
+    this.userService
+      .update(this.user)
       .subscribe(
         res => this.router.navigate(['/user']),
         err => console.log(err)
@@ -89,7 +75,6 @@ export class UpdateUserComponent implements OnInit {
 
     return false;
   }
-
 }
 
 @Injectable()
