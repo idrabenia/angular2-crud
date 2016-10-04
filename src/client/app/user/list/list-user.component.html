@@ -8,22 +8,28 @@
   <div>
     <table class="table">
       <thead>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Email</th>
-          <th></th>
-        </tr>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th></th>
+      </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let curUser of users" >
-          <td [routerLink]="['/user/' + curUser._id]">{{curUser.firstName}}</td>
-          <td [routerLink]="['/user/' + curUser._id]">{{curUser.lastName}}</td>
-          <td [routerLink]="['/user/' + curUser._id]">{{curUser.email}}</td>
-          <td (click)="deleteUser(curUser)">x</td>
-        </tr>
+      <tr *ngFor="let curUser of users">
+        <td [routerLink]="['/user/' + curUser._id]">{{curUser.firstName}}</td>
+        <td [routerLink]="['/user/' + curUser._id]">{{curUser.lastName}}</td>
+        <td [routerLink]="['/user/' + curUser._id]">{{curUser.email}}</td>
+        <td (click)="deleteUser(curUser)">x</td>
+      </tr>
       </tbody>
     </table>
   </div>
+
+  <sd-confirmation-dialog #deleteDialog
+                          question="Are you really want to delete this user?">
+  </sd-confirmation-dialog>
 </div>
+
 <router-outlet></router-outlet>
+

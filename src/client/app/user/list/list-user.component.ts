@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { UserService } from './../user.service';
 import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/mergeMap';
+import { ConfirmationDialogComponent } from './../../shared/confirmation-dialog/index';
 
 /**
  * This class represents the lazy loaded HomeComponent.
@@ -14,6 +16,9 @@ import 'rxjs/add/operator/filter';
   providers: [UserService]
 })
 export class ListUserComponent implements OnInit {
+
+  @ViewChild('deleteDialog')
+  deleteDialog: ConfirmationDialogComponent;
 
   users: any[] = [];
   isListState: boolean;
@@ -60,12 +65,20 @@ export class ListUserComponent implements OnInit {
   }
 
   deleteUser(user) {
-    this.userService
-      .deleteUser(user._id)
+    this.deleteDialog
+      .open()
+      .yesClick
+      .flatMap(res =>
+        this.userService.deleteUser(user._id)
+      )
       .subscribe(
         data => this.ngOnInit(),
         err => console.log(err)
       );
+  }
+
+  openModal() {
+
   }
 
 }

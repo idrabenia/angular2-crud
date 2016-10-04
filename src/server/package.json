@@ -16,6 +16,7 @@
     "log4js": "^0.6.38",
     "logzio-nodejs": "^0.3.10",
     "mongoose": "^4.6.0",
+    "ng2-bootstrap": "^1.1.5",
     "node-uuid": "^1.4.7"
   }
 }
