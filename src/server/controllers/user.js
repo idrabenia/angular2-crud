@@ -7,6 +7,7 @@ let router = require('express').Router();
 
 
 module.exports = (function () {
+
   let User = mongoose.model('User', {
     firstName: String,
     lastName: String,
@@ -52,4 +53,5 @@ module.exports = (function () {
   }));
 
   return router;
+
 })();
