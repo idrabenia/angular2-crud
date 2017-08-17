@@ -18,39 +18,37 @@ module.exports = (function () {
       callback(req, res).catch(error => res.json({ error }));
   }
 
-  router.post('/', safe((req, res) => {
-    return User
-      .create(req.body)
-      .then(user => res.json(user));
+  router.post('/', safe(async (req, res) => {
+    const user = await User.create(req.body);
+
+    res.json(user);
   }));
 
-  router.get('/', safe((req, res) => {
-    return User
-      .find()
-      .then(users => res.json(users));
+  router.get('/', safe(async (req, res) => {
+    res.json(await User.find());
   }));
 
-  router.get('/:userId', safe((req, res) => {
-    return User
-      .findById(req.params.userId)
-      .then(user => res.json(user));
+  router.get('/:userId', safe(async (req, res) => {
+    let user = await User.findById(req.params.userId);
+
+    res.json(user);
   }));
 
-  router.post('/:userId', safe((req, res) => {
+  router.post('/:userId', safe(async (req, res) => {
     let userId = req.params.userId;
 
-    return User
-      .update({ '_id': userId }, req.body)
-      .then(result => User.findById(userId))
-      .then(user => res.json(user));
+    await User.update({ '_id': userId }, req.body);
+    const user = await User.findById(userId);
+
+    res.json(user);
   }));
 
-  router.delete('/:userId', safe((req, res) => {
+  router.delete('/:userId', safe(async (req, res) => {
     let userId = req.params.userId;
 
-    return User
-      .findByIdAndRemove(userId)
-      .then(() => res.json({ }));
+    await User.findByIdAndRemove(userId);
+
+    res.json({ });
   }));
 
   return router;

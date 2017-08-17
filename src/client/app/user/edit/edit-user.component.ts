@@ -84,6 +84,6 @@ export class UserResolver implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
     return this.userService
       .findById(route.params['id'])
-      .map(res => res.json());
+      .map(res => res['json']());
   }
 }

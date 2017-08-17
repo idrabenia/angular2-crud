@@ -59,7 +59,7 @@ export class ListUserComponent implements OnInit {
     this.userService
       .query()
       .subscribe(
-        res => this.users = res.json(),
+        res => this.users = res['json'](),
         err => console.log(err)
       );
   }
